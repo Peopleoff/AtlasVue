@@ -1,0 +1,70 @@
+.serverInfoCard {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.list-group-item{
+    padding: 5px 15px;
+}
+
+a[data-height] {
+    text-align: center;
+}
+
+#serverInformation > .form-group{
+    margin: 0;
+}
+
+.addBtn{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.longText{
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333 linear-gradient(to right, #ccc, #333, #ccc);
+    margin: 10px 0;
+}
+
+.download{
+    cursor: pointer;
+    float: right;
+}
+
+.notification{
+    display: inline-block;
+    margin: 15px auto;
+    position: fixed;
+    transition: all 0.5s ease-in-out;
+    z-index: 1031;
+    top: 20px;
+    right: 20px;
+    text-shadow: 0 0 black;
+}
+
+.notification .message{
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.modal-body > textarea{
+    width: 100%;
+    resize: none;
+}
+
+.modal-title > input {
+    width: 100%;
+}
+
+.dropdown-menu{
+  left: -10em;
+}

@@ -1,7 +1,10 @@
 /* jshint indent: 2 */
 
+// let t_documentation = require ('t_documentation');
+// let servers = require ('servers');
+
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('j_documentation_server_id', {
+  let j_documentation_server_id = sequelize.define('j_documentation_server_id', {
     documentation_server_documentation_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
@@ -21,4 +24,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     tableName: 'j_documentation_server_id'
   });
+
+    return j_documentation_server_id
 };

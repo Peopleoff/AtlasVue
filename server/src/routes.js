@@ -9,8 +9,9 @@ module.exports = (app) => {
   app.get('/ServerTypes', Servers.getAllServersTypes);
   app.get('/getUserGroups', User.getUserGroups);
   app.get('/Documentation', Documentation.getAllDocumentation);
+  app.get('/DisplayServer/:id', Servers.DisplayServer);
+  app.get('/Servers/', Servers.getAllServers);
   // Post Requests
-  app.post('/Servers', Servers.getAllServers);
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
   app.post('/login', AuthenticationController.login);
   app.post('/Servers', Servers.addServer);

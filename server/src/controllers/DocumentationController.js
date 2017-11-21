@@ -4,14 +4,14 @@ const {users} = require('../models');
 
 module.exports = {
     async getAllDocumentation (req, res) {
+
         try {
           users.hasMany(t_documentation, {foreignKey: 'id'});
             t_documentation.belongsTo(users, {foreignKey: 'documentation_last_user_updated'});
             const server = await t_documentation.findAll({
                 where: {
                     "documentation_status": 1
-                },
-                include: [User]
+                }
 
             });
             res.send(server);

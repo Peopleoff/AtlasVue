@@ -5,7 +5,8 @@ const {server_types} = require('../models');
 module.exports = {
 
   async getAllServers (req, res) {
-    const {location_id} = req.body;
+    const location_id = req.params.location_id;
+    console.log(req.params);
     try {
       server_types.hasMany(servers, {foreignKey: 'id'});
       servers.belongsTo(server_types, {foreignKey: 'server_type_id'});
@@ -25,6 +26,25 @@ module.exports = {
       })
     }
   },
+    async DisplayServer (req, res) {
+        const id = req.params.id;
+        console.log(id);
+        try {
+            console.log("inside" + id);
+            const server = await servers.findAll({
+                where: {
+                    "id": id,
+                    "server_status_id": 1
+                }
+            });
+            res.send(server);
+        } catch (err){
+            res.status(500).send({
+                error: err,
+                "message": "Error"
+            })
+        }
+    },
   async getAllServersTypes (req, res) {
     try {
       const serverTypes = await server_types.findAll();

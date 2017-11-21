@@ -1,23 +1,38 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div class="wrapper" id="app">
+    <!--SideNav-->
+   <Sidenav />
+    <div class="main-panel">
+      <Topnav />
+      <div class="content">
+        <div class="container-fluid">
+          <router-view/>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+
+  import Topnav from '@/components/includes/Topnav.vue'
+  import Sidenav from '@/components/includes/Sidenav.vue'
+  import Bottomnav from '@/components/includes/Bottomnav.vue'
+
+  export default {
+    name: 'app',
+    components: {
+      Topnav,
+      Sidenav,
+      Bottomnav
+    }
+  }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import '../static/css/bootstrap.min.css';
+  @import '../static/css/material-dashboard.css';
+  @import '../static/css/styles.css';
+  @import '../static/fonts/icons.css';
 </style>
