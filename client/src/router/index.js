@@ -28,7 +28,7 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/DisplayServer/:server_id',
+      path: '/DisplayServer',
       name: 'displayServer',
       component: DisplayServer
     },
@@ -38,7 +38,7 @@ export default new Router({
       component: Profile
     },
     {
-      path: '/networkmanager/:location_id',
+      path: '/networkmanager',
       name: 'NetworkManager',
       component: NetworkManager
     },

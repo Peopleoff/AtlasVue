@@ -96,7 +96,7 @@
               <li @click="navigate({
               name: 'ServerRacks',
               params: {
-                location_id: '1'
+                location_id: 1
               }
               })">
                 <a href="#">Fort Myers</a>
@@ -104,7 +104,7 @@
               <li @click="navigate({
               name: 'ServerRacks',
               params: {
-                location_id: '2'
+                location_id: 2
               }
               })">
                 <a href="#">Maine</a>

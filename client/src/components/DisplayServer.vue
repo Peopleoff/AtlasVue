@@ -1,6 +1,72 @@
 <template>
   <Loader v-if="loading"></Loader>
   <div class="row" v-else>
+    <div class="col-lg-12" v-for="server in server">
+      <div class="card" id="serverInformation">
+        <div class="card-header">
+          <h3 class="card-title">Server Information</h3>
+          <small>{{server.hostname}} - {{server.local_ip}}</small>
+        </div>
+        <div class="card-content">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-6 server-tag">Hostname: </div>
+                <div class="col-sm-6 server-info">{{server.hostname}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Description: </div>
+                <div class="col-sm-6 server-info">{{server.description}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Local IP: </div>
+                <div class="col-sm-6 server-info">{{server.local_ip}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Public IP: </div>
+                <div class="col-sm-6 server-info">{{server.public_ip}}</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-6 server-tag">Hostname: </div>
+                <div class="col-sm-6 server-info">{{server.hostname}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Description: </div>
+                <div class="col-sm-6 server-info">{{server.description}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Local IP: </div>
+                <div class="col-sm-6 server-info">{{server.local_ip}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Public IP: </div>
+                <div class="col-sm-6 server-info">{{server.public_ip}}</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-6 server-tag">Purchase Date: </div>
+                <div class="col-sm-6 server-info">{{server.purchase_date}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Warranty End Date: </div>
+                <div class="col-sm-6 server-info">{{server.warranty_end_date}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Created Date: </div>
+                <div class="col-sm-6 server-info">{{server.createdAt || moment()}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 server-tag">Last Updated Date: </div>
+                <div class="col-sm-6 server-info">{{server.updatedAt || moment()}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -8,28 +74,50 @@
 <script>
   import ServerService from '@/services/ServerService'
   import Loader from '@/components/includes/Loader'
+  import moment from 'moment'
+
   export default {
     name: 'displayServer',
     components: {
       Loader
     },
-    data () {
+    data() {
       return {
         loading: true,
-        servers: null,
+        server: null,
+        serverTypes: null
       }
     },
-    async mounted(){
+    async mounted() {
       let id = this.$store.state.route.params.id;
-      this.servers = (await ServerService.showServer({
+      this.server = (await ServerService.showServer({
         id: id
       })).data;
+      this.serverTypes = (await ServerService.getAllServerTypes()).data;
       this.loading = false;
     },
+
+    filters: {
+      timestamp (date) {
+        return moment(date).format();
+      }
+    }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  div{
+    font-size: 20px;
+    line-height: 1.5em;
+  }
+  .server-tag{
+    text-align: left;
+    font-weight: bolder;
+  }
+  .server-info{
+    text-align: left;
+  }
 
 </style>

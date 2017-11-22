@@ -109,6 +109,7 @@
     },
     async mounted(){
       let location_id = this.$store.state.route.params.location_id;
+      console.log(location_id);
       this.servers = (await ServerService.getAllServers({
         location_id: location_id
       })).data;

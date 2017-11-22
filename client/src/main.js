@@ -5,9 +5,7 @@ import App from './App'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
-import VueGoodTable from 'vue-good-table';
-
-Vue.use(VueGoodTable);
+window.moment = require('moment');
 
 Vue.config.productionTip = false;
 
