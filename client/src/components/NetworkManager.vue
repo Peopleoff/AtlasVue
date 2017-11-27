@@ -23,7 +23,7 @@
                 <th class="text-center">Actions</th>
               </tr></thead>
               <tbody>
-              <tr v-for="server in filteredList">
+              <tr v-for="server in servers">
                 <td class="bold">
                   <strong>{{server.hostname}}</strong> <br>
                   <small>{{server.description}} - {{server.local_ip}}</small>
@@ -108,39 +108,13 @@
       }
     },
     async mounted(){
-      let location_id = this.$store.state.route.params.location_id;
-      console.log(location_id);
-      this.servers = (await ServerService.getAllServers({
-        location_id: location_id
-      })).data;
+      this.servers = (await ServerService.getAllServers(this.$store.state.route.params.location_id)).data;
+      this.serverTypes = (await ServerService.getAllServerTypes()).data;
       this.loading = false;
-      this.serverTypes = (await ServerService.getAllServerTypes()).data
     },
     methods: {
       navigate (route) {
         this.$router.push(route)
-      }
-    },
-    computed: {
-      filteredList() {
-        return this.servers.filter((server) => {
-
-          let hostname = server.hostname.toLowerCase().includes(this.keyword.toLowerCase());
-          let ip = server.local_ip.toLowerCase().toString().includes(this.keyword.toLowerCase().toString());
-          let description = server.description.toLowerCase().includes(this.keyword.toLowerCase());
-          let serverType = server.server_type.server_type_name.toLowerCase().includes(this.serverSelect.toLowerCase());
-          if (serverType === false){
-            return serverType
-          }
-          if (hostname === true){
-            return hostname;
-          } else if (ip === true){
-            return ip
-          } else{
-            return description
-          }
-
-        });
       }
     }
   }

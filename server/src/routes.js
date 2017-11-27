@@ -8,13 +8,14 @@ module.exports = (app) => {
   // Get Requests
   app.get('/ServerTypes', Servers.getAllServersTypes);
   app.get('/getUserGroups', User.getUserGroups);
+  app.get('/Users', User.getUsers);
   app.get('/Documentation', Documentation.getAllDocumentation);
+    app.get('/DisplayServer/:id', Servers.DisplayServer);
+    app.get('/Servers/:location_id', Servers.getAllServers);
   // Post Requests
-    app.post('/Servers', Servers.getAllServers);
-    app.post('/DisplayServer', Servers.DisplayServer);
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
   app.post('/login', AuthenticationController.login);
   app.post('/Servers', Servers.addServer);
-  app.post('/Profile', User.getProfile)
+  app.get('/Profile/:id', User.getProfile)
 
 };

@@ -2,9 +2,12 @@ import Api from '@/services/Api'
 
 export default {
   getProfile (id) {
-    return Api().post('Profile', id)
+    return Api().get(`Profile/${id}`)
   },
   getUserGroups () {
     return Api().get('getUserGroups')
+  },
+  getUsers () {
+    return Api().get('Users')
   }
 }

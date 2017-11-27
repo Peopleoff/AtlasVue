@@ -7,6 +7,7 @@ import DisplayServer from '@/components/DisplayServer'
 import Profile from '@/components/Profile'
 import NetworkManager from '@/components/NetworkManager'
 import Documentation from '@/components/Documentation'
+import Users from '@/components/Users'
 
 Vue.use(Router);
 
@@ -28,17 +29,17 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/DisplayServer',
+      path: '/DisplayServer/:id',
       name: 'displayServer',
       component: DisplayServer
     },
     {
-      path: '/Profile',
+      path: '/profile/:id',
       name: 'profile',
       component: Profile
     },
     {
-      path: '/networkmanager',
+      path: '/networkmanager/:location_id',
       name: 'NetworkManager',
       component: NetworkManager
     },
@@ -46,6 +47,11 @@ export default new Router({
       path: '/documentation',
       name: 'Documentation',
       component: Documentation
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users
     }
   ]
 })

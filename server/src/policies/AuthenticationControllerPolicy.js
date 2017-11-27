@@ -3,9 +3,9 @@ const Joi = require('joi')
 module.exports = {
     register(req, res, next) {
         const schema = {
-            user_firstname: Joi.string(),
-            user_lastname: Joi.string(),
-            user_login: Joi.string(),
+            user_firstname: Joi.string().required(),
+            user_lastname: Joi.string().required(),
+            user_login: Joi.string().required(),
             user_password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{4,32}')),
             user_group: Joi.number().integer().required(),
             user_email: Joi.string().email(),

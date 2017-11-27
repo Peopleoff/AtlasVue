@@ -1,22 +1,13 @@
-const {User} = require('../models');
+const {users} = require('../models');
 const {user_groups} = require('../models');
 
 module.exports = {
     async getProfile (req, res) {
         try {
-            const {user_id} = req.body;
-            if(user_id){
-                const server = await User.findOne({
-                    where: {
-                        id: user_id
-                    }
-                });
-                res.send(server);
-            } else {
-                const server = await User.findOne();
-                res.send(server);
-            }
-
+            const id = req.params.id;
+            console.log(req.params);
+            const server = await users.findById(req.params.id);
+            res.send(server);
         } catch (err){
             res.status(500).send({
                 error: err,
@@ -28,6 +19,17 @@ module.exports = {
         try {
                 const userGroups = await user_groups.findAll();
                 res.send(userGroups);
+        } catch (err){
+            res.status(500).send({
+                error: err,
+                "message": "Error"
+            })
+        }
+    },
+    async getUsers (req, res) {
+        try {
+            const allUsers = await users.findAll();
+            res.send(allUsers);
         } catch (err){
             res.status(500).send({
                 error: err,

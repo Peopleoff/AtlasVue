@@ -13,7 +13,6 @@ function hashPassword(user, options) {
         .then(hash => {
           user.setDataValue('user_password', hash)
         })
-
 }
 
 module.exports = function(sequelize, DataTypes) {
@@ -76,9 +75,8 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'users'
   });
 
-   users.prototype.comparePassword = function (user_password) {
-     return bcrypt.compareAsync(user_password, this.user_password)
-
+   users.prototype.comparePassword = function (password){
+     return bcrypt.compareAsync(password, this.user_password)
    };
 
     return users

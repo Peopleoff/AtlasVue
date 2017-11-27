@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" id="app">
     <!--SideNav-->
-   <Sidenav />
+   <Sidenav></Sidenav>
     <div class="main-panel">
       <Topnav />
       <div class="content">

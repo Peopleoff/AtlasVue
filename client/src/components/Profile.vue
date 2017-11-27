@@ -1,5 +1,6 @@
 <template>
-  <div class="row">
+  <Loader v-if="loading"></Loader>
+  <div class="row" v-else>
     <div class="col-md-7">
       <div class="card">
         <div class="card-header card-header-icon" data-background-color="orange">
@@ -13,13 +14,13 @@
               <div class="col-md-6">
                 <div class="form-group label-floating">
                   <label class="control-label">Fist Name</label>
-                  <input type="text" class="form-control" name="first_name">
+                  <input type="text" class="form-control" name="first_name" v-bind:value="user.user_firstname">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group label-floating">
                   <label class="control-label">Last Name</label>
-                  <input type="text" class="form-control" name="first_name">
+                  <input type="text" class="form-control" name="first_name" v-bind:value="user.user_lastname">
                 </div>
               </div>
             </div>
@@ -33,7 +34,7 @@
               <div class="col-md-6">
                 <div class="form-group label-floating">
                   <label class="control-label">Email</label>
-                  <input type="text" class="form-control" name="user_email">
+                  <input type="text" class="form-control" name="user_email" v-bind:value="user.user_email">
                 </div>
               </div>
             </div>
@@ -41,13 +42,13 @@
               <div class="col-md-6">
                 <div class="form-group label-floating">
                   <label class="control-label">Work Phone</label>
-                  <input type="text" class="form-control" name="work_phone">
+                  <input type="text" class="form-control" name="work_phone" v-bind:value="user.user_work_phone">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group label-floating">
                   <label class="control-label">Mobile Phone</label>
-                  <input type="text" class="form-control"  name="mobile_phone">
+                  <input type="text" class="form-control"  name="mobile_phone" v-bind:value="user.user_mobile_phone">
                 </div>
               </div>
             </div>
@@ -88,17 +89,26 @@
 
 <script>
   import UserService from '@/services/UserService'
+  import Loader from '@/components/includes/Loader'
+
   export default {
     name: 'Profile',
     data () {
       return {
         user: {},
         userGroups: {},
-        servers: {}
+        servers: {},
+        loading: true
       }
     },
+    components: {
+      Loader
+    },
     async mounted () {
-      this.user = (await UserService.getProfile()).data
+      const profileID = this.$store.state.route.params.id;
+      console.log(profileID);
+      this.user = (await UserService.getProfile(profileID)).data;
+      this.loading = false;
     },
     methods: {
 

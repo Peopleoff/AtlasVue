@@ -1,7 +1,7 @@
 <template>
   <Loader v-if="loading"></Loader>
   <div class="row" v-else>
-    <div class="col-lg-12" v-for="server in server">
+    <div class="col-lg-12">
       <div class="card" id="serverInformation">
         <div class="card-header">
           <h3 class="card-title">Server Information</h3>
@@ -9,58 +9,58 @@
         </div>
         <div class="card-content">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-6">
               <div class="row">
-                <div class="col-sm-6 server-tag">Hostname: </div>
-                <div class="col-sm-6 server-info">{{server.hostname}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Hostname: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.hostname}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Description: </div>
-                <div class="col-sm-6 server-info">{{server.description}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Description: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.description}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Local IP: </div>
-                <div class="col-sm-6 server-info">{{server.local_ip}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Local IP: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.local_ip}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Public IP: </div>
-                <div class="col-sm-6 server-info">{{server.public_ip}}</div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col-sm-6 server-tag">Hostname: </div>
-                <div class="col-sm-6 server-info">{{server.hostname}}</div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 server-tag">Description: </div>
-                <div class="col-sm-6 server-info">{{server.description}}</div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 server-tag">Local IP: </div>
-                <div class="col-sm-6 server-info">{{server.local_ip}}</div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 server-tag">Public IP: </div>
-                <div class="col-sm-6 server-info">{{server.public_ip}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Public IP: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.public_ip}}</div>
               </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-6">
               <div class="row">
-                <div class="col-sm-6 server-tag">Purchase Date: </div>
-                <div class="col-sm-6 server-info">{{server.purchase_date}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Hostname: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.hostname}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Warranty End Date: </div>
-                <div class="col-sm-6 server-info">{{server.warranty_end_date}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Description: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.description}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Created Date: </div>
-                <div class="col-sm-6 server-info">{{server.createdAt || moment()}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Local IP: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.local_ip}}</div>
               </div>
               <div class="row">
-                <div class="col-sm-6 server-tag">Last Updated Date: </div>
-                <div class="col-sm-6 server-info">{{server.updatedAt || moment()}}</div>
+                <div class="col-sm-4 col-md-6 server-tag">Public IP: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.public_ip}}</div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-md-6">
+              <div class="row">
+                <div class="col-sm-4 col-md-6 server-tag">Purchased: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.purchase_date}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4 col-md-6 server-tag">Warranty Date: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.warranty_end_date}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4 col-md-6 server-tag">Created: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.createdAt}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4 col-md-6 server-tag">Last Updated: </div>
+                <div class="col-sm-8 col-md-6 server-info">{{server.updatedAt}}</div>
               </div>
             </div>
           </div>
@@ -74,7 +74,6 @@
 <script>
   import ServerService from '@/services/ServerService'
   import Loader from '@/components/includes/Loader'
-  import moment from 'moment'
 
   export default {
     name: 'displayServer',
@@ -89,18 +88,11 @@
       }
     },
     async mounted() {
-      let id = this.$store.state.route.params.id;
-      this.server = (await ServerService.showServer({
-        id: id
-      })).data;
+      this.server = (await ServerService.showServer(this.$store.state.route.params.id)).data;
       this.serverTypes = (await ServerService.getAllServerTypes()).data;
       this.loading = false;
     },
-
     filters: {
-      timestamp (date) {
-        return moment(date).format();
-      }
     }
   }
 </script>

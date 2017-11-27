@@ -16,7 +16,10 @@
       return {
         loading: true
       }
-    }
+    },
+    async mounted () {
+      this.loading = false;
+    },
   }
 </script>
 

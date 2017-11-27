@@ -1,9 +1,9 @@
-const {users} = require('../models')
-const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const {users} = require('../models');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
 function jwtSignUser (user){
-  const ONE_WEEK = 60 * 60 * 24 * 7
+  const ONE_WEEK = 60 * 60 * 24 * 7;
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_WEEK
   })
@@ -26,28 +26,30 @@ module.exports = {
 
   async login (req, res) {
     try {
-      const {user_login, user_password} = req.body
-      const user = await users.findOne({
+      const {user_login, user_password} = req.body;
+
+      console.log('User Login '+user_login);
+      console.log('User Password '+user_password);
+
+      const loginUser = await users.find({
         where: {
           user_login: user_login
         }
-      })
-      if (!user){
+      });
+      if (!loginUser){
         return res.status(400).send({
           error: 'login information is incorrect'
         })
       }
 
-      const validPassword = await user.comparePassword(user_password)
-
+      const validPassword = loginUser.comparePassword(user_password);
       if(!validPassword){
-        return res.status(400).send({
+        return res.status(403).send({
           error: 'login information is incorrect'
         })
       }
 
-      const userJson = user.toJSON()
-      // console.log(userJson.user.user_login + ' Logged in')
+      const userJson = loginUser.toJSON();
       res.send({
         user: userJson,
         token: jwtSignUser(userJson)
@@ -60,4 +62,4 @@ module.exports = {
       })
     }
   },
-}
+};

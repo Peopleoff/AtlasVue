@@ -6,11 +6,11 @@
       </a>
     </div>
     <div class="sidebar-wrapper">
-      <div class="user">
+      <div class="user" v-if="$store.state.user">
         <div class="info text-center">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
-                                First name + Last name
+                                {{$store.state.user.user_firstname}}
                                 <b class="caret"></b>
                             </span>
           </a>
@@ -21,22 +21,16 @@
                 <router-link to="profile">Profile</router-link>
               </li>
               <li>
-                <a href="/users">
-                  <span class="sidebar-normal">Users</span>
-                </a>
+                <router-link to="users">Users</router-link>
               </li>
               <li>
                 <router-link to="register">Register</router-link>
               </li>
               <li>
-                <a href="/settings">
-                  <span class="sidebar-normal">Settings</span>
-                </a>
+                <router-link to="settings">Settings</router-link>
               </li>
               <li>
-                <a href="/users/changePassword">
-                  <span class="sidebar-normal">Change Password</span>
-                </a>
+                <router-link to="changePassword">Change Password</router-link>
               </li>
               <li @click="logout">
                 <a href="#">
@@ -65,20 +59,10 @@
           </a>
           <div class="collapse" id="serversSelect">
             <ul class="nav text-center">
-              <li @click="navigate({
-              name: 'NetworkManager',
-              params: {
-                location_id: '1'
-              }
-              })">
+              <li @click="$router.push({name: 'NetworkManager', params: {location_id: 1}})">
                 <a href="#">Fort Myers</a>
               </li>
-              <li @click="navigate({
-              name: 'NetworkManager',
-              params: {
-                location_id: '2'
-              }
-              })">
+              <li @click="$router.push({name: 'NetworkManager', params: {location_id: 2}})">
                 <a href="#">Maine</a>
               </li>
             </ul>
@@ -131,12 +115,11 @@
     name: 'Sidenav',
     data () {
       return {
-
       }
     },
     methods: {
       navigate (route) {
-        this.$router.push(route)
+        this.$router.go(route)
       },
       logout () {
         this.$store.dispatch('setToken', null);
@@ -151,5 +134,4 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
