@@ -10,7 +10,8 @@
         <label>Filter Server Type</label>
         <select id="serverSelect" v-model="serverSelect">
           <option value="">All</option>
-          <option v-for="types in serverTypes" v-bind:value="types.server_type_name">{{ types.server_type_name }}</option>
+          <option v-for="types in serverTypes" v-bind:value="types.server_type_name">{{ types.server_type_name }}
+          </option>
         </select>
         <div class="card-content">
           <div class="table-responsive">
@@ -21,7 +22,8 @@
                 <th>Server</th>
                 <th>OS</th>
                 <th class="text-center">Actions</th>
-              </tr></thead>
+              </tr>
+              </thead>
               <tbody>
               <tr v-for="server in servers">
                 <td class="bold">
@@ -32,16 +34,13 @@
                 <td>Oud-Turnhout</td>
                 <td class="td-actions text-center">
                   <div class="dropdown">
-                    <button href="#" class="btn dropdown-toggle btn-simple" data-toggle="dropdown" aria-expanded="true" >
+                    <button href="#" class="btn dropdown-toggle btn-simple" data-toggle="dropdown" aria-expanded="true">
                       <i class="material-icons">more_horiz</i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li @click="navigate({
-              name: 'displayServer',
-              params: {
-                id: server.id
-              }
-              })"><a href="#">View Server</a></li>
+                      <router-link tag="li" :to="{name: 'displayServer', params: {id: server.id}}">
+                        <a href="#">View Server</a>
+                      </router-link>
                       <li><a href="#">Another action</a></li>
                       <li><a href="#">Something else here</a></li>
                       <li class="divider"></li>
@@ -69,12 +68,13 @@
 <script>
   import ServerService from '@/services/ServerService'
   import Loader from '@/components/includes/Loader'
+
   export default {
     name: 'Network-Manager',
     components: {
       Loader
     },
-    data () {
+    data() {
       return {
         loading: true,
         servers: [],
@@ -103,19 +103,13 @@
             field: 'public_ip'
           }
         ],
-        rows: [
-        ]
+        rows: []
       }
     },
-    async mounted(){
+    async mounted() {
       this.servers = (await ServerService.getAllServers(this.$store.state.route.params.location_id)).data;
       this.serverTypes = (await ServerService.getAllServerTypes()).data;
       this.loading = false;
-    },
-    methods: {
-      navigate (route) {
-        this.$router.push(route)
-      }
     }
   }
 </script>

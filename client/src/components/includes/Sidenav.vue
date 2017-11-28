@@ -10,7 +10,7 @@
         <div class="info text-center">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
-                                {{$store.state.user.user_firstname}}
+                                {{$store.state.user.user_firstname}} {{$store.state.user.user_lastname}}
                                 <b class="caret"></b>
                             </span>
           </a>
@@ -18,19 +18,19 @@
           <div class="collapse" id="collapseExample">
             <ul class="nav">
               <li>
-                <router-link to="profile">Profile</router-link>
+                <router-link tag="a" :to="{name: 'profile', params: {id:$store.state.user.id}}">Profile</router-link>
               </li>
               <li>
-                <router-link to="users">Users</router-link>
+                <router-link tag="a" :to="{name: 'Users'}">Users</router-link>
               </li>
               <li>
-                <router-link to="register">Register</router-link>
+                <router-link tag="a" :to="{name: 'register'}">Register</router-link>
               </li>
               <li>
-                <router-link to="settings">Settings</router-link>
+                <router-link tag="a" :to="{name: 'settings'}">Settings</router-link>
               </li>
               <li>
-                <router-link to="changePassword">Change Password</router-link>
+                <router-link tag="a" :to="{name: 'changePassword'}">Change Password</router-link>
               </li>
               <li @click="logout">
                 <a href="#">
@@ -42,14 +42,12 @@
         </div>
       </div>
       <ul class="nav">
-        <li @click="navigate({
-              name: 'dashboard'
-              })">
+        <router-link tag="li" :to="{name: 'dashboard'}">
           <a href="#">
             <i class="material-icons">dashboard</i>
             <p>Dashboard</p>
           </a>
-        </li>
+        </router-link>
         <li>
           <a data-toggle="collapse" href="#serversSelect">
             <i class="material-icons">http</i>
@@ -59,12 +57,12 @@
           </a>
           <div class="collapse" id="serversSelect">
             <ul class="nav text-center">
-              <li @click="$router.push({name: 'NetworkManager', params: {location_id: 1}})">
+              <router-link tag="li" :to="{name: 'NetworkManager', params: {location_id: 1}}">
                 <a href="#">Fort Myers</a>
-              </li>
-              <li @click="$router.push({name: 'NetworkManager', params: {location_id: 2}})">
+              </router-link>
+              <router-link tag="li" :to="{name: 'NetworkManager', params: {location_id: 2}}">
                 <a href="#">Maine</a>
-              </li>
+              </router-link>
             </ul>
           </div>
         </li>
@@ -77,33 +75,21 @@
           </a>
           <div class="collapse" id="racks">
             <ul class="nav text-center">
-              <li @click="navigate({
-              name: 'ServerRacks',
-              params: {
-                location_id: 1
-              }
-              })">
+              <router-link tag="li" :to="{name: 'ServerRacks', params: {location_id: 1}}">
                 <a href="#">Fort Myers</a>
-              </li>
-              <li @click="navigate({
-              name: 'ServerRacks',
-              params: {
-                location_id: 2
-              }
-              })">
+              </router-link>
+              <router-link tag="li" :to="{name: 'ServerRacks', params: {location_id: 2}}">
                 <a href="#">Maine</a>
-              </li>
+              </router-link>
             </ul>
           </div>
         </li>
-        <li @click="navigate({
-              name: 'Documentation'
-              })">
+        <router-link tag="li" :to="{name: 'Documentation'}">
           <a href="#">
             <i class="material-icons">code</i>
             <p>Documentation</p>
           </a>
-        </li>
+        </router-link>
 
       </ul>
     </div>
@@ -118,9 +104,6 @@
       }
     },
     methods: {
-      navigate (route) {
-        this.$router.go(route)
-      },
       logout () {
         this.$store.dispatch('setToken', null);
         this.$store.dispatch('setUser', null);

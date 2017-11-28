@@ -7,12 +7,10 @@
           <i class="material-icons">people</i>
         </div>
         <h4 class="card-title">Users</h4>
-        <a class="addBtn" href="#" @click="navigate({
-              name: 'register'
-              })">
+        <router-link tag="a" class="addBtn" :to="{name: 'register'}">
           <i class="material-icons">add_circle</i>
           <div class="ripple-container"></div>
-        </a>
+        </router-link>
         <div class="card-content">
           <div class="table-responsive">
             <table class="table">
@@ -41,15 +39,14 @@
                   <i class="material-icons" style="color: red">clear</i>
                 </td>
                 <td class="td-actions text-right">
-                  <a type="button" rel="tooltip" class="btn btn-info"
-                     @click="navigate({
+                  <router-link tag="a" type="button" rel="tooltip" class="btn btn-info" :to="{
                       name: 'profile',
                       params: {
                         id: users.id
                       }
-                      })">
+                      }">
                     <i class="material-icons">person</i>
-                  </a>
+                  </router-link>
                   <a v-on:click="showSwal(users.user_id)" type="button"
                      rel="tooltip"
                      class="btn btn-danger">
@@ -85,9 +82,6 @@
       this.loading = false;
     },
     methods: {
-      navigate (route) {
-        this.$router.push(route)
-      },
       showSwal: function (user_id) {
         swal({
           title: 'Are you sure?',
