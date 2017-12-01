@@ -27,6 +27,9 @@
     data () {
       return {
       }
+    },
+    beforeCreate: function () {
+      
     }
   }
 </script>

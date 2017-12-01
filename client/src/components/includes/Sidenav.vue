@@ -10,7 +10,7 @@
         <div class="info text-center">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
-                                {{$store.state.user.user_firstname}} {{$store.state.user.user_lastname}}
+                                {{z}} {{$store.state.user.user_lastname}}
                                 <b class="caret"></b>
                             </span>
           </a>

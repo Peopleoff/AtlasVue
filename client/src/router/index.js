@@ -11,7 +11,7 @@ import Users from '@/components/Users'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -54,4 +54,23 @@ export default new Router({
       component: Users
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (1 === 1) {
+    if (1===1) {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath,
+        },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
