@@ -7,7 +7,7 @@
           <i class="material-icons">assignment</i>
         </div>
         <h4 class="card-title">Fort Myers</h4>
-        <label>Filter Server Type</label>
+        <label for="serverSelect">Filter Server Type</label>
         <select id="serverSelect" v-model="serverSelect">
           <option value="">All</option>
           <option v-for="types in serverTypes" v-bind:value="types.server_type_name">{{ types.server_type_name }}
@@ -19,8 +19,7 @@
               <thead class="text-primary">
               <tr>
                 <th>Server</th>
-                <th>Server</th>
-                <th>OS</th>
+                <th>Server Type</th>
                 <th class="text-center">Actions</th>
               </tr>
               </thead>
@@ -30,8 +29,7 @@
                   <strong>{{server.hostname}}</strong> <br>
                   <small>{{server.description}} - {{server.local_ip}}</small>
                 </td>
-                <td>Oud-Turnhout</td>
-                <td>Oud-Turnhout</td>
+                <td>{{server.server_type.server_type_name}}</td>
                 <td class="td-actions text-center">
                   <div class="dropdown">
                     <button href="#" class="btn dropdown-toggle btn-simple" data-toggle="dropdown" aria-expanded="true">
@@ -42,11 +40,6 @@
                         <a href="#">View Server</a>
                       </router-link>
                       <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">One more separated link</a></li>
                     </ul>
                   </div>
                 </td>

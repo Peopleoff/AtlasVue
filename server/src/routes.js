@@ -3,6 +3,7 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 const Servers = require('./controllers/ServersController');
 const User = require('./controllers/UserController');
 const Documentation = require('./controllers/DocumentationController');
+const Locations = require('./controllers/LocationsController');
 
 module.exports = (app) => {
   // Get Requests
@@ -10,8 +11,10 @@ module.exports = (app) => {
   app.get('/getUserGroups', User.getUserGroups);
   app.get('/Users', User.getUsers);
   app.get('/Documentation', Documentation.getAllDocumentation);
-    app.get('/DisplayServer/:id', Servers.DisplayServer);
-    app.get('/Servers/:location_id', Servers.getAllServers);
+  app.get('/DisplayServer/:id', Servers.DisplayServer);
+  app.get('/Servers/:location_id', Servers.getAllServers);
+  app.get('/Racks/:location_id', Servers.getAllRacks);
+  app.get('/locations/:location_id', Locations.getAllLocations);
   // Post Requests
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
   app.post('/login', AuthenticationController.login);

@@ -10,7 +10,7 @@
         <div class="info text-center">
           <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
-                                {{z}} {{$store.state.user.user_lastname}}
+                                {{$store.state.user.user_firstname}} {{$store.state.user.user_lastname}}
                                 <b class="caret"></b>
                             </span>
           </a>
@@ -27,10 +27,10 @@
                 <router-link tag="a" :to="{name: 'register'}">Register</router-link>
               </li>
               <li>
-                <router-link tag="a" :to="{name: 'settings'}">Settings</router-link>
+                <router-link tag="a" :to="{name: 'Settings'}">Settings</router-link>
               </li>
               <li>
-                <router-link tag="a" :to="{name: 'changePassword'}">Change Password</router-link>
+                <router-link tag="a" :to="{name: 'ChangePassword'}">Change Password</router-link>
               </li>
               <li @click="logout">
                 <a href="#">

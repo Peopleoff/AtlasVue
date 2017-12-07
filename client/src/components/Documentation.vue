@@ -40,10 +40,10 @@
                 <tr v-for="document in documentation">
                   <td>{{ document.documentation_title }}</td>
                   <td class="longText">{{ document.documentation_note }}</td>
-                  <td class="text-center">By {{ document.user_firstname
+                  <td class="text-center"> By {{ document.user.user_firstname
                     }} on {{ document.documentation_date_created }}
                   </td>
-                  <td class="text-center" v-if="document.documentation_last_updated_date">By {{ document.user_firstname
+                  <td class="text-center" v-if="document.documentation_last_updated_date"> By {{ document.user.user_firstname
                     }} on {{ document.documentation_last_updated_date }}
                   </td>
                   <td class="text-center" v-else></td>

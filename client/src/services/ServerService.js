@@ -5,6 +5,9 @@ export default {
   getAllServers (location_id) {
     return Api().get(`Servers/${location_id}`)
   },
+  getAllRacks (location_id) {
+    return Api().get(`Racks/${location_id}`)
+  },
   getAllServerTypes () {
     return Api().get('ServerTypes')
   },

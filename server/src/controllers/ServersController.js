@@ -1,5 +1,6 @@
 const {servers} = require('../models');
 const {server_types} = require('../models');
+const {racks} = require('../models');
 
 
 module.exports = {
@@ -25,6 +26,22 @@ module.exports = {
       })
     }
   },
+    async getAllRacks (req, res) {
+        const location_id = req.params.location_id;
+        try {
+            const rack = await racks.findAll({
+                where: {
+                    "rack_location": location_id,
+                },
+            });
+            res.send(rack);
+        } catch (err){
+            res.status(500).send({
+                error: err,
+                "message": "Error"
+            })
+        }
+    },
     async DisplayServer (req, res) {
         const id = req.params.id;
         console.log(req.params);

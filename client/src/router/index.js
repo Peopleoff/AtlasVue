@@ -7,7 +7,12 @@ import DisplayServer from '@/components/DisplayServer'
 import Profile from '@/components/Profile'
 import NetworkManager from '@/components/NetworkManager'
 import Documentation from '@/components/Documentation'
+import ServerRacks from '@/components/ServerRacks'
 import Users from '@/components/Users'
+import Settings from '@/components/Settings'
+import ChangePassword from '@/components/ChangePassword'
+
+import store from '@/store/store'
 
 Vue.use(Router);
 
@@ -44,9 +49,24 @@ const router = new Router({
       component: NetworkManager
     },
     {
+      path: '/serverracks/:location_id',
+      name: 'ServerRacks',
+      component: ServerRacks
+    },
+    {
       path: '/documentation',
       name: 'Documentation',
       component: Documentation
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
+    },
+    {
+      path: '/changepassword',
+      name: 'ChangePassword',
+      component: ChangePassword
     },
     {
       path: '/users',
@@ -57,20 +77,21 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (1 === 1) {
-    if (1===1) {
-      next({
-        path: '/login',
-        query: {
-          redirect: to.fullPath,
-        },
-      });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
 
+  if (!store.state.user && to.path !== '/') {
+    console.log(to.path);
+    console.log('user not logged in');
+    next('/')
+  } else {
+    next()
+  }
+
+  if (store.state.user && to.path === '/') {
+    console.log('user logged in');
+    next('/dashboard')
+  } else {
+    next()
+  }
+
+});
 export default router;
