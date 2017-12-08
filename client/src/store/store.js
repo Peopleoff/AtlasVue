@@ -13,7 +13,8 @@ export default new Vuex.Store({
   ],
   state: {
     token: null,
-    user: null
+    user: null,
+    isAuth: null
   },
   mutations: {
     setToken (state, token) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setIsAuth (state, isAuth){
+      state.isAuth = isAuth
     }
   },
   actions: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     setUser ({commit}, user) {
       commit('setUser', user)
+    },
+    setIsAuth ({commit}, isAuth){
+      commit('setIsAuth', isAuth)
     }
   }
 })

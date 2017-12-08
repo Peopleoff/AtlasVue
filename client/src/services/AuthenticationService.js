@@ -7,5 +7,9 @@ export default {
 
   login (credentails) {
     return Api().post('login', credentails)
+  },
+
+  isAuth (credentails){
+    return Api().post('isAuth', credentails)
   }
 }

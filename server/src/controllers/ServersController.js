@@ -1,6 +1,8 @@
 const {servers} = require('../models');
 const {server_types} = require('../models');
+const {services} = require('../models');
 const {racks} = require('../models');
+const {server_services} = require('../models');
 
 
 module.exports = {
@@ -44,14 +46,21 @@ module.exports = {
     },
     async DisplayServer (req, res) {
         const id = req.params.id;
-        console.log(req.params);
-        console.log(id);
+        services.belongsToMany(servers, {
+            through: server_services,
+            foreignKey: 'service_id_fk'
+        });
+        servers.belongsToMany(services, {
+            through: server_services,
+            foreignKey: 'server_id'
+        });
         try {
             const server = await servers.findOne({
                 where: {
                     "id": id,
                     "server_status_id": 1
-                }
+                },
+                include: [services]
             });
             res.send(server);
         } catch (err){

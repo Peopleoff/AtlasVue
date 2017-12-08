@@ -2,6 +2,14 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('server_user_groups', {
+    server_id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true,
+        references: {
+            model: 'servers',
+            key: 'id'
+        }
+    },
     user_group_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
@@ -10,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    access_level_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
     user_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
@@ -21,6 +25,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'users',
         key: 'id'
       }
+    },
+    access_level_id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true
     }
   }, {
     tableName: 'server_user_groups'

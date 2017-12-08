@@ -23,18 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    services_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    user_group_access: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    user_access: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
     local_ip: {
       type: DataTypes.STRING(250),
       allowNull: true

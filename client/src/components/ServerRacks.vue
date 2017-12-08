@@ -19,7 +19,7 @@
             <div class="col-md-9">
               <div class="tab-content">
                 <div class="tab-pane" v-for="racks in racks" :id="'rack'+racks.id">
-                  <div class="list-group" v-bind:id="'serverRack' + racks.id" v-bind:data-rack="racks.id">
+                  <div class="list-group serverRack" v-bind:id="'serverRack' + racks.id" v-bind:data-rack="racks.id">
                   <a type="button" class="list-group-item list-group-item-action" v-for="racks in racks.rack_height"></a>
                   </div>
                 </div>
@@ -79,7 +79,11 @@
             let rackButton = $('#serverRack' + rackID).find('[data-height=' + serverLocation + ']')[0];
             rackButton.innerText = serverHostname;
             rackButton.href = "/#/DisplayServer/" + server[i].id;
-//            rackButton.style.height = (liHeight * serverHeight) + "px";
+            rackButton.style.height = (33 * serverHeight) + "px";
+            rackButton.style.lineHeight = (33 * serverHeight) + "px";
+            for (let xs = 1; xs < serverHeight; xs++) {
+              rackButton.nextElementSibling.remove();
+            }
           }
         }
 
@@ -97,6 +101,10 @@
   .sidePill{
     border-right: 1px solid;
     height: 75vh;
+  }
+
+  .serverRack{
+    border: 2px solid black;
   }
 
   /* Custom, iPhone Retina */

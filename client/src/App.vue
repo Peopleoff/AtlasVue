@@ -5,7 +5,7 @@
     <div class="main-panel">
       <Topnav />
       <div class="content">
-        <div class="container-fluid">
+        <div class="container">
           <router-view/>
         </div>
       </div>

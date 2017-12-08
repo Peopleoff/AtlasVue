@@ -15,10 +15,11 @@ module.exports = (app) => {
   app.get('/Servers/:location_id', Servers.getAllServers);
   app.get('/Racks/:location_id', Servers.getAllRacks);
   app.get('/locations/:location_id', Locations.getAllLocations);
+  app.get('/Profile/:id', User.getProfile);
   // Post Requests
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
   app.post('/login', AuthenticationController.login);
   app.post('/Servers', Servers.addServer);
-  app.get('/Profile/:id', User.getProfile)
+  app.post('/isAuth', AuthenticationController.isAuth);
 
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" data-active-color="rose" data-background-color="black" data-image="/static/assets/globe.gif">
+  <div class="sidebar" data-active-color="rose" data-background-color="black" data-image="/static/assets/globe.gif" v-if="$store.state.user">
     <div class="logo">
       <a href="/" class="simple-text logo-normal text-center">
         Atlas
