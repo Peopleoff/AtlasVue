@@ -13,5 +13,8 @@ export default {
   },
   showServer (id) {
     return Api().get(`DisplayServer/${id}`)
+  },
+  updateServer (server) {
+    return Api().post('updateServer', server)
   }
 }

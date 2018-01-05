@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('joi');
 
 module.exports = {
     register(req, res, next) {
@@ -8,10 +8,7 @@ module.exports = {
             user_login: Joi.string().required(),
             user_password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{4,32}')),
             user_group: Joi.number().integer().required(),
-            user_email: Joi.string().email(),
-            user_work_phone: Joi.string(),
-            user_mobile_phone: Joi.string(),
-
+            user_email: Joi.string().email()
         };
 
         const {error, value} = Joi.validate(req.body, schema);

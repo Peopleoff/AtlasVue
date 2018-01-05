@@ -18,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    documentation_date_created: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
     documentation_last_user_updated: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
@@ -29,10 +25,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'users',
         key: 'id'
       }
-    },
-    documentation_last_updated_date: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
     },
     documentation_type: {
       type: DataTypes.INTEGER(11),
@@ -46,6 +38,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'status_types',
         key: 'id'
       }
+    },
+    server_id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: true,
+        references: {
+            model: 'servers',
+            key: 'id'
+        }
     }
   }, {
     tableName: 't_documentation'

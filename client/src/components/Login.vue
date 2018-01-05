@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+  <div class="col-md-4 col-sm-6 col-md-offset-2 col-sm-offset-3">
     <div class="card card-login">
       <div class="card-header text-center" data-background-color="orange">
         <h4 class="card-title">Login</h4>
@@ -63,5 +63,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  .card .card-content{
+    padding: 15px 30px 0 10px;
+  }
 
 </style>

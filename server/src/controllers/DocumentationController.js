@@ -4,11 +4,9 @@ const {users} = require('../models');
 
 module.exports = {
     async getAllDocumentation (req, res) {
-
         try {
             users.hasMany(t_documentation, {foreignKey: 'id'});
             t_documentation.belongsTo(users, {foreignKey: 'documentation_user_created'});
-            t_documentation.belongsTo(users, {foreignKey: 'documentation_last_user_updated'});
             const server = await t_documentation.findAll({
                 where: {
                     'documentation_status': 1
@@ -23,4 +21,70 @@ module.exports = {
             })
         }
     },
+
+    async createDocument (req, res) {
+        try {
+            await t_documentation.create(req.body);
+            res.redirect('/documentation');
+        } catch (err) {
+            res.status(400).send({
+                error: err,
+                message: 'failed'
+            })
+        }
+    },
+
+    async deleteDocument (req, res) {
+        let values = req.body;
+        let id = req.body.id;
+        delete values.id;
+        try {
+           const document = await t_documentation.findOne({
+                where: {
+                    id: id
+                }
+            }).then(function (obj) {
+              if(obj){
+                  return obj.update({
+                      documentation_status: 2
+                  });
+              } else {
+                  return t_documentation.create(values);
+              }
+           });
+            res.send(document);
+        } catch (err) {
+            res.status(400).send({
+                error: err,
+                message: 'failed'
+            })
+        }
+    },
+
+    async updateDocument (req, res) {
+        let values = req.body;
+        let id = req.body.id;
+        delete values.id;
+        try {
+            const document = await t_documentation.findOne({
+                where: {
+                    id: id
+                }
+            }).then(function (obj) {
+                if(obj){
+                    return obj.update(values);
+                } else {
+                    return t_documentation.create(values);
+                }
+            });
+            res.send(document);
+        } catch (err) {
+            res.status(400).send({
+                error: err,
+                message: 'failed'
+            })
+        }
+    },
+
+
 };

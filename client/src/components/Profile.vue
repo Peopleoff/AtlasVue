@@ -106,7 +106,6 @@
     },
     async mounted () {
       const profileID = this.$store.state.route.params.id;
-      console.log(profileID);
       this.user = (await UserService.getProfile(profileID)).data;
       this.loading = false;
     },

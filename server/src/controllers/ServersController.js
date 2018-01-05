@@ -2,6 +2,8 @@ const {servers} = require('../models');
 const {server_types} = require('../models');
 const {services} = require('../models');
 const {racks} = require('../models');
+const {server_vm_host} = require('../models');
+const {server_hardware} = require('../models');
 const {server_services} = require('../models');
 
 
@@ -54,13 +56,15 @@ module.exports = {
             through: server_services,
             foreignKey: 'server_id'
         });
+
+        servers.hasOne(server_hardware, { foreignKey: 'server_id' });
         try {
             const server = await servers.findOne({
                 where: {
                     "id": id,
                     "server_status_id": 1
                 },
-                include: [services]
+                include: [services, server_hardware]
             });
             res.send(server);
         } catch (err){
@@ -91,5 +95,27 @@ module.exports = {
                 message: 'failed'
             })
         }
-    }
+    },
+
+    async updateServer (req, res) {
+        try {
+            const service = await servers.findOne({
+                where: {
+                    id: req.body.id
+                }
+            }).then(function (obj) {
+                if(obj){
+                    return obj.update(req.body);
+                } else {
+                    return servers.create(req.body);
+                }
+            });
+            res.send(service);
+        } catch (err) {
+            res.status(400).send({
+                error: err,
+                message: 'failed'
+            })
+        }
+    },
 };

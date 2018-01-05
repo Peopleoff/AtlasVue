@@ -1,8 +1,5 @@
 /* jshint indent: 2 */
 
-// let t_documentation = require ('t_documentation');
-// let servers = require ('servers');
-
 module.exports = function(sequelize, DataTypes) {
   let j_documentation_server_id = sequelize.define('j_documentation_server_id', {
     documentation_server_documentation_id: {

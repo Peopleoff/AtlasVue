@@ -17,6 +17,7 @@ import store from '@/store/store'
 Vue.use(Router);
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -79,15 +80,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
 
   if (!store.state.user && to.path !== '/') {
-    console.log(to.path);
-    console.log('user not logged in');
     next('/')
   } else {
     next()
   }
 
   if (store.state.user && to.path === '/') {
-    console.log('user logged in');
     next('/dashboard')
   } else {
     next()

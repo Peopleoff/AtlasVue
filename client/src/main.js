@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
+import VueSweetalert2 from 'vue-sweetalert2';
+import vuemoment from 'vue-moment';
+
+Vue.use(VueSweetalert2);
+Vue.use(vuemoment);
 
 Vue.config.productionTip = false;
 

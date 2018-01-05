@@ -65,6 +65,7 @@ hr {
     width: 100%;
 }
 
-.dropdown-menu{
-  left: -10em;
+.bold span{
+  color: green;
+  font-weight: bolder;
 }

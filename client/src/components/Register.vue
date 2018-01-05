@@ -6,9 +6,7 @@
           <i class="material-icons">perm_identity</i>
         </div>
         <div class="card-content">
-          <h4 class="card-title">Add New User
-            <small class="category">Complete your profile</small>
-          </h4>
+          <h4 class="card-title">Add New User</h4>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group label-floating">
@@ -52,14 +50,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group label-floating">
-                <label class="control-label">User Password</label>
-                <input type="text" class="form-control" name="userWork" v-model="user.user_password">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group label-floating">
+                <label class="control-label">User Group</label>
                 <select name="server_type_id" class="form-control" v-model="user.group">
                   <option v-for="uGroup in userGroups" v-bind:value="uGroup.id">
                     {{uGroup.name}}
@@ -102,7 +95,7 @@
       }
     },
     async mounted() {
-      this.userGroups = (await UserService.getUserGroups()).data
+      this.userGroups = (await UserService.getUserGroups()).data;
     },
     methods: {
       generatePassword() {
@@ -112,16 +105,18 @@
         for (let i = 0, n = charset.length; i < length; ++i) {
           retVal += charset.charAt(Math.floor(Math.random() * n));
         }
+        console.log(retVal);
         return retVal;
       },
 
       async register() {
+        this.error = null;
         try {
           await AuthenticationService.register({
             user_firstname: this.user.firstname,
             user_lastname: this.user.lastname,
             user_login: this.user.user_login,
-            user_password: this.user.user_password,
+            user_password: this.generatePassword(),
             user_email: this.user.email,
             user_work_phone: this.user.work_phone,
             user_mobile_phone: this.user.mobile_phone,

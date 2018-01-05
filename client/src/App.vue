@@ -3,7 +3,7 @@
     <!--SideNav-->
    <Sidenav></Sidenav>
     <div class="main-panel">
-      <Topnav />
+      <Topnav ref="topNav"></Topnav>
       <div class="content">
         <div class="container">
           <router-view/>

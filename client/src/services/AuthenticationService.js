@@ -11,5 +11,9 @@ export default {
 
   isAuth (credentails){
     return Api().post('isAuth', credentails)
+  },
+
+  decryptPassword (password) {
+    return Api().post('decryptPassword', password)
   }
 }

@@ -16,12 +16,6 @@
         </button>
       </div>
       <div class="collapse navbar-collapse">
-        <form class="navbar-form navbar-right" role="search">
-          <div class="form-group form-search is-empty">
-            <input type="text" class="form-control" placeholder="Search" v-model="keyword">
-            <span class="material-input"></span>
-          </div>
-        </form>
         <ul class="nav navbar-nav navbar-right">
           <li class="separator hidden-lg hidden-md"></li>
         </ul>
@@ -35,8 +29,6 @@
     name: 'Topnav',
     data () {
       return {
-        keyword: ''
-
       }
     }
   }

@@ -6,7 +6,7 @@ module.exports = {
     password: 'SystemAdmin0321',
     options: {
       dialect: 'mysql',
-      host: '172.16.9.34'
+      host: 'ruslanbelyy.me'
     }
   }
-}
+};
