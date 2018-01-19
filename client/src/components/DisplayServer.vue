@@ -143,24 +143,6 @@
                            name="serial_number">
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="form-group label-floating">
-                    <select name="rack_id" class="form-control" v-model="rackSelect">
-                      <option value="">No Rack</option>
-                      <option v-for="rack in rack" v-bind:value="rack.rack_id"
-                              v-bind:selected="servers.rack_id">{{ rack.rack_name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group label-floating">
-                    <label class="control-label">Rack Location</label>
-                    <input type="text" class="form-control"
-                           v-bind:value=" servers.server_rack_location "
-                           name="server_rack_location">
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -215,6 +197,48 @@
             </div>
             <!--End of Services Spec card-->
             <!--Start of VM Spec card-->
+          <div class="card serverInfoCard" v-if="servers.server_vm_hosts.length > 0">
+            <div class="row">
+              <div class="card-content">
+                <h3 class="card-title">Virtual Machines</h3>
+                <a class="addBtn" data-value="" data-toggle="modal" data-target="#addService"
+                   v-on:click="updateService()" v-if="$store.state.isAuth">
+                  <i class="material-icons">add_circle</i>
+                  <div class="ripple-container"></div>
+                </a>
+                <div class="table-response">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>IP</th>
+                      <th>Status</th>
+                      <th class="text-center" v-if="$store.state.isAuth">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="server in servers.server_vm_hosts">
+                      <td>template</td>
+                      <td class="td-actions text-center" v-if="$store.state.isAuth">
+                        <div class="dropdown">
+                          <button href="#" class="btn dropdown-toggle btn-simple" data-toggle="dropdown"
+                                  aria-expanded="true">
+                            <i class="material-icons">more_horiz</i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a v-on:click="decryptPassword(server)">View Password</a></li>
+                            <li><a v-on:click="updateService(server)">Update Service</a></li>
+                            <li><a v-on:click="deleteService(server)">Delete Service</a></li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
             <!--End of VM Spec card-->
             <button type="submit" class="btn btn-primary pull-right" v-if="$store.state.isAuth" v-on:click="updateServer('asd')">Update Server</button>
             <div class="clearfix"></div>

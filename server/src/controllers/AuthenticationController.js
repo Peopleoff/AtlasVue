@@ -16,11 +16,13 @@ function jwtSignUser(user) {
 module.exports = {
 
     async register(req, res) {
-        let body = `Welcome to Atlas. Please visit <a href="172.16.9.34">Atlas</a> to Login. Your username is <strong>${req.body.user_login}</strong> and your Temporary password is <strong>${req.body.user_password}</strong> It is recommended that you change your password on first login. Or don't. It's randomly generated and secure already.`;
+        let body = `Welcome to Atlas. Please visit <a href="atlas.intruity.net">Atlas</a> to Login. Your username is <strong>${req.body.user_login}</strong> and your Temporary password is <strong>${req.body.user_password}</strong> It is recommended that you change your password on first login.`;
         try {
-            const user = await users.create(req.body);
-            common.sendEmail(req.body.user_email,'User Registered for Atlas', body);
-            res.send(user);
+            await users.create(req.body);
+            common.sendEmail(req.body.user_email,'Welcome to Atlas', body);
+            res.send({
+                message: "User Added"
+            })
         } catch (err) {
             res.status(400).send({
                 error: err,
@@ -39,24 +41,23 @@ module.exports = {
                 }
             });
             if (!loginUser) {
-                return res.status(400).send({
-                    error: 'login information is incorrect'
-                })
-            }
-
-            const validPassword = loginUser.comparePassword(user_password);
-            if (!validPassword) {
                 return res.status(403).send({
                     error: 'login information is incorrect'
                 })
             }
-
-            const userJson = loginUser.toJSON();
-            res.send({
-                user: userJson,
-                token: jwtSignUser(userJson)
-            })
-
+            const validPassword = loginUser.comparePassword(user_password);
+            console.log(validPassword + " this is from validPassowrd");
+            if (validPassword) {
+                const userJson = loginUser.toJSON();
+                res.send({
+                    user: userJson,
+                    token: jwtSignUser(userJson)
+                })
+            } else{
+                return res.status(403).send({
+                    error: 'login information is incorrect'
+                })
+            }
         } catch (err) {
             res.status(500).send({
                 error: err,
@@ -100,6 +101,34 @@ module.exports = {
             res.status(400).send({
                 error: err,
                 message: 'failed'
+            })
+        }
+    },
+
+    async changePassword(req, res) {
+        try {
+            const {id, newPassword, newPassword2} = req.body;
+
+            const loginUser = await users.find({
+                where: {
+                    id: id
+                }
+            });
+
+            //Check if passwords match
+            if (newPassword !== newPassword2) {
+                return res.status(403).send({
+                    error: "Passwords don't match"
+                })
+            }
+            loginUser.update({ user_password: newPassword2 });
+            res.send({
+                message: "Password changed"
+            })
+        } catch (err) {
+            res.status(500).send({
+                error: err,
+                message: 'failed login'
             })
         }
     },

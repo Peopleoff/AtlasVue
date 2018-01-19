@@ -5,6 +5,7 @@ const {racks} = require('../models');
 const {server_vm_host} = require('../models');
 const {server_hardware} = require('../models');
 const {server_services} = require('../models');
+const Sequelize = require('sequelize');
 
 
 module.exports = {
@@ -58,6 +59,12 @@ module.exports = {
         });
 
         servers.hasOne(server_hardware, { foreignKey: 'server_id' });
+        servers.hasMany(server_vm_host, { foreignKey: 'server_vm_host_server_id' });
+        server_vm_host.belongsTo(servers, { foreignKey: 'server_vm_vm_id'});
+        Sequelize.query("SELECT * FROM server_vm_host JOIN servers on server_vm_host.server_vm_host_server_id = servers.id WHERE server_vm_host_server_id = " + id).spread((results, metadata) => {
+            // Results will be an empty array and metadata will contain the number of affected rows.
+            let serve_vms = results;
+        });
         try {
             const server = await servers.findOne({
                 where: {

@@ -30,6 +30,7 @@ module.exports = (app) => {
   app.post('/updateLinkService', Services.updateLinkService);
   app.post('/deleteService', Services.deleteService);
   app.post('/login', AuthenticationController.login);
+  app.post('/changePassword', AuthenticationControllerPolicy.changePassword, AuthenticationController.changePassword);
   app.post('/Servers', Servers.addServer);
   app.post('/isAuth', AuthenticationController.isAuth);
   app.post('/addAttachment', Attachments.addAttachment);

@@ -12,7 +12,9 @@ export default {
   isAuth (credentails){
     return Api().post('isAuth', credentails)
   },
-
+  changePassword (credentails){
+    return Api().post('changePassword', credentails)
+  },
   decryptPassword (password) {
     return Api().post('decryptPassword', password)
   }

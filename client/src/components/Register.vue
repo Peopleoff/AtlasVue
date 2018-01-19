@@ -69,7 +69,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -121,6 +120,22 @@
             user_work_phone: this.user.work_phone,
             user_mobile_phone: this.user.mobile_phone,
             user_group: this.user.group
+          }).then(response => {
+            this.user.firstname = null;
+            this.user.lastname = null;
+            this.user.user_login = null;
+            this.user.user_password = null;
+            this.user.email = null;
+            this.user.work_phone = null;
+            this.user.mobile_phone = null;
+            this.user.group = null;
+            $.notify({
+              // options
+              message: response.data.message
+            }, {
+              // settings
+              type: 'success'
+            });
           })
         } catch (error) {
           this.error = error.response.data.error.details

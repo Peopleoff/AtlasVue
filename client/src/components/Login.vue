@@ -54,7 +54,15 @@
           this.$store.dispatch('setUser', response.data.user);
           this.$router.push('dashboard')
         } catch (error) {
-          this.error = error.response.data
+          console.log(error);
+          this.error = error.response.data;
+          $.notify({
+            // options
+            message: this.error.error
+          },{
+            // settings
+            type: 'danger'
+          });
         }
       }
     }

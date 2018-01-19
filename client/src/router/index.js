@@ -11,6 +11,7 @@ import ServerRacks from '@/components/ServerRacks'
 import Users from '@/components/Users'
 import Settings from '@/components/Settings'
 import ChangePassword from '@/components/ChangePassword'
+import Test from '@/components/Test'
 
 import store from '@/store/store'
 
@@ -73,6 +74,11 @@ const router = new Router({
       path: '/users',
       name: 'Users',
       component: Users
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     }
   ]
 });
