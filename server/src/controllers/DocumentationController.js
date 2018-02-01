@@ -7,30 +7,15 @@ module.exports = {
         try {
             users.hasMany(t_documentation,
                 {
-                    as: 'createdUser',
                     foreignKey: 'id'
                 });
-            // users.hasMany(t_documentation,
-            //     {
-            //         as: 'updatedUser',
-            //         foreignKey: 'id'
-            //     });
-
             t_documentation.belongsTo(users, {
-                as: 'createdUser',
-                foreignKey: 'documentation_user_created',
+                foreignKey: 'documentation_last_user_updated',
             });
-
-            // t_documentation.belongsTo(users, {
-            //     as: 'updatedUser',
-            //     foreignKey: 'documentation_last_user_updated',
-            // });
-
             const server = await t_documentation.findAll({
                 where: {
                     'documentation_status': 1
                 },
-                //include: [{model: users, as: 'createdUser'}, {model: users, as: 'updatedUser'}]
                 include: [users]
             });
             res.send(server);
@@ -42,26 +27,6 @@ module.exports = {
             })
         }
     },
-
-    // async getAllDocumentation (req, res) {
-    //     try {
-    //         users.hasMany(t_documentation, {foreignKey: 'id'});
-    //         t_documentation.belongsTo(users, {foreignKey: 'documentation_user_created'});
-    //         const server = await t_documentation.findAll({
-    //             where: {
-    //                 'documentation_status': 1
-    //             },
-    //             include: [users]
-    //         });
-    //         res.send(server);
-    //     } catch (err){
-    //         res.status(500).send({
-    //             error: err,
-    //             "message": "Error"
-    //         })
-    //     }
-    // },
-
     async createDocument(req, res) {
         try {
             await t_documentation.create(req.body);

@@ -42,19 +42,15 @@
                 <thead>
                 <tr>
                   <th>Title</th>
-                  <th class="text-center">Created By</th>
-                  <th class="text-center">Updated By</th>
+                  <th class="text-center">Last Updated</th>
                   <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="document in documentation">
                   <td class="longText" v-on:click="viewDocument(document)">{{ document.documentation_title }}</td>
-                  <td class="text-center"> By {{ document.createdUser.user_firstname
+                  <td class="text-center"> By {{ document.user.user_firstname
                     }} on {{ document.createdAt | moment("dddd, MMMM Do YYYY") }}
-                  </td>
-                  <td class="text-center" v-if="document.user"> By {{ document.createdUser.user_firstname
-                    }} on {{ document.updatedAt | moment("dddd, MMMM Do YYYY") }}
                   </td>
                   <td class="td-actions text-center">
                     <div class="dropdown">
@@ -325,7 +321,7 @@
           DocumentationService.createDocument({
             documentation_title: this.document.document_title,
             documentation_note: this.document.document_description,
-            documentation_user_created: this.$store.state.userCreated.id
+            documentation_last_user_updated: this.$store.state.user.id
           });
           location.reload();
         } catch (error) {
@@ -338,7 +334,7 @@
             id: this.updateDocumentation.id,
             documentation_title: this.updateDocumentation.document_title,
             documentation_note: this.updateDocumentation.document_description,
-            documentation_last_user_updated: this.$store.state.userCreated.id
+            documentation_last_user_updated: this.$store.state.user.id
           });
           location.reload();
         } catch (error) {

@@ -10,14 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    documentation_user_created: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'users',
-        key: 'id'
-      }
-    },
     documentation_last_user_updated: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
