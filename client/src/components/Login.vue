@@ -75,8 +75,4 @@
   .card .card-content{
     padding: 15px 30px 0 10px;
   }
-
-  .title{
-  }
-
 </style>
