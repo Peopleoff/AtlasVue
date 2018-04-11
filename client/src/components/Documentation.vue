@@ -345,7 +345,7 @@
     computed: {},
     filters: {
       moment: function (date) {
-        return moment(date).subtract(10, 'days').calendar();
+        return moment(date).calendar();
       }
     }
   }

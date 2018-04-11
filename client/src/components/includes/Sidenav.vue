@@ -90,6 +90,24 @@
             <p>Documentation</p>
           </a>
         </router-link>
+        <li>
+          <a data-toggle="collapse" href="#code">
+            <i class="material-icons">code</i>
+            <p>Code
+              <b class="caret"></b>
+            </p>
+          </a>
+          <div class="collapse" id="code">
+            <ul class="nav text-center">
+              <router-link tag="li" :to="{name: 'CodeGuide'}">
+                <a href="#">Code Style Guide</a>
+              </router-link>
+              <router-link tag="li" :to="{name: 'StyleGuide'}">
+                <a href="#">Style Guide</a>
+              </router-link>
+            </ul>
+          </div>
+        </li>
 
       </ul>
     </div>
