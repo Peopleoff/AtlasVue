@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js src/app.js",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "lint": "./node_modules/.bin/eslint **/*.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +27,8 @@
     "mysql2": "^1.5.0",
     "nodemailer": "^4.4.1",
     "nodemon": "^1.12.1",
-    "sequelize": "^4.22.7"
+    "sequelize": "^4.22.7",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "eslint-config-standard": "^10.2.1",
@@ -33,5 +36,6 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1"
-  }
+  },
+  "snyk": true
 }
